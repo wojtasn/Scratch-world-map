@@ -21,7 +21,7 @@ public class DemoApplication {
 	@Bean
 	CommandLineRunner init(CountryService countryService) {
 		return args -> {
-			Stream.of("Polska", "Argentyna", "Stany Zjednoczone", "Nowa Zelandia", "Meksyk").forEach(name -> {
+			Stream.of("Polska", "Argentyna", "Stany Zjednoczone", "Nowa Zelandia", "Meksyk", "Rosja").forEach(name -> {
 				CountryTO country = CountryTO.builder().name(name).build();
 				countryService.add(country);
 			});
