@@ -7,10 +7,14 @@ import com.example.demo.persistence.repository.CountryRepository;
 import com.example.demo.persistence.repository.impl.CountryRepositoryImpl;
 import com.example.demo.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Service
+@Transactional
 public class CountryServiceImpl implements CountryService {
 
     private CountryRepository countryRepository;
