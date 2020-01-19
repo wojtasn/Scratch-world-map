@@ -2,12 +2,12 @@ package com.example.demo.persistence.repository;
 
 import com.example.demo.persistence.entity.CountryEntity;
 
-import java.util.Set;
+import java.util.List;
 
 public interface CountryRepository {
-
-    public CountryEntity add(CountryEntity country);
-    public CountryEntity getById(Long id);
-    public Set<CountryEntity> findAll();
-    public CountryEntity delete(Long id);
+    CountryEntity add(CountryEntity country);
+    CountryEntity getById(Long id);
+    List<CountryEntity> findAll();
+    CountryEntity delete(Long id);
+    Long updateLastId();
 }

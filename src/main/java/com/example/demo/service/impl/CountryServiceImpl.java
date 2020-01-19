@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,21 +29,25 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public CountryTO add(CountryTO country) {
-        return countryMapper.mapCountryTO(countryRepository.add(countryMapper.mapToCountryEntity(country)));
+        CountryEntity countryEntity = countryMapper.map(country);
+        if(country.getId() == null){
+            countryEntity.setId(countryRepository.updateLastId());
+        }
+        return countryMapper.map(countryRepository.add(countryEntity));
     }
 
     @Override
     public CountryTO getById(Long id) {
-        return countryMapper.mapCountryTO(countryRepository.getById(id));
+        return countryMapper.map(countryRepository.getById(id));
     }
 
     @Override
-    public Set<CountryTO> findAll() {
-        return countryRepository.findAll().stream().map(c -> countryMapper.mapCountryTO(c)).collect(Collectors.toSet());
+    public List<CountryTO> findAll() {
+        return countryRepository.findAll().stream().map(c -> countryMapper.map(c)).collect(Collectors.toList());
     }
 
     @Override
     public CountryTO delete(Long id) {
-        return countryMapper.mapCountryTO(countryRepository.delete(id));
+        return countryMapper.map(countryRepository.delete(id));
     }
 }

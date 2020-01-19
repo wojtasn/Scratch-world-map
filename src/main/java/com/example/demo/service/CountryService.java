@@ -2,13 +2,11 @@ package com.example.demo.service;
 
 import com.example.demo.common.domain.CountryTO;
 
-import java.util.Set;
+import java.util.List;
 
 public interface CountryService {
-
-    public CountryTO add(CountryTO country);
-    public CountryTO getById(Long id);
-    public Set<CountryTO> findAll();
-    public CountryTO delete(Long id);
-
+    CountryTO add(CountryTO country);
+    CountryTO getById(Long id);
+    List<CountryTO> findAll();
+    CountryTO delete(Long id);
 }

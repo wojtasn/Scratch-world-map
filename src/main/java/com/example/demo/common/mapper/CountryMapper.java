@@ -2,22 +2,39 @@ package com.example.demo.common.mapper;
 
 import com.example.demo.common.domain.CountryTO;
 import com.example.demo.persistence.entity.CountryEntity;
+import com.example.demo.persistence.repository.CountryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CountryMapper {
 
-    public CountryTO mapCountryTO(CountryEntity countryEntity) {
+    private CountryRepository countryRepository;
+
+    @Autowired
+    public CountryMapper(CountryRepository countryRepository){
+        this.countryRepository = countryRepository;
+    }
+
+    public CountryTO map(CountryEntity countryEntity) {
         if (countryEntity == null) {
             return null;
         }
-        return CountryTO.builder().id(countryEntity.getId()).name(countryEntity.getName()).build();
+        CountryTO country = new CountryTO();
+        country.setId(countryEntity.getId());
+        country.setName(countryEntity.getName());
+        return country;
     }
 
-    public CountryEntity mapToCountryEntity(CountryTO countryTO) {
+    public CountryEntity map(CountryTO countryTO) {
         if (countryTO == null) {
             return null;
         }
-        return CountryEntity.builder().name(countryTO.getName()).build();
+        CountryEntity country = countryRepository.getById(countryTO.getId());
+        if(country == null){
+            country = new CountryEntity();
+        }
+        country.setName(countryTO.getName());
+        return country;
     }
 }

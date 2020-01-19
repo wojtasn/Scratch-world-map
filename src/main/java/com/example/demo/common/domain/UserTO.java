@@ -1,5 +1,6 @@
 package com.example.demo.common.domain;
 
+import com.example.demo.common.domain.common.AbstractTO;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -10,15 +11,15 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserTO {
+public class UserTO extends AbstractTO {
     private Long id;
     private String email;
     private String password;
     private Long levelId;
     private Long points;
-    private List<Long> countries = new ArrayList<>();
+    private List<Long> journeys = new ArrayList<>();
 
-    public List<Long> getCountries(){
-        return countries;
+    public boolean hasJourneys(){
+        return journeys != null && !journeys.isEmpty();
     }
 }

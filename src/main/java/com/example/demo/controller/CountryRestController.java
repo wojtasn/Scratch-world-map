@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class CountryRestController {
+
 
     private final CountryService countryService;
 
@@ -20,7 +21,7 @@ public class CountryRestController {
     }
 
     @GetMapping("/countries")
-    public Set<CountryTO> getCountries() {
+    public List<CountryTO> getCountries() {
         return countryService.findAll();
     }
 

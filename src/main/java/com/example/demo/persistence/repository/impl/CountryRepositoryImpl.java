@@ -1,18 +1,17 @@
 package com.example.demo.persistence.repository.impl;
 
 import com.example.demo.persistence.entity.CountryEntity;
-import com.example.demo.persistence.entity.UserEntity;
 import com.example.demo.persistence.repository.CountryRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public class CountryRepositoryImpl implements CountryRepository {
 
-    public Set<CountryEntity> countryDB = new HashSet<>();
+    private Long lastId = 1L;
+    private List<CountryEntity> countryDB = new ArrayList<>();
 
     @Override
     public CountryEntity add(CountryEntity country) {
@@ -26,7 +25,7 @@ public class CountryRepositoryImpl implements CountryRepository {
     }
 
     @Override
-    public Set<CountryEntity> findAll() {
+    public List<CountryEntity> findAll() {
         return countryDB;
     }
 
@@ -35,5 +34,10 @@ public class CountryRepositoryImpl implements CountryRepository {
         CountryEntity country = getById(id);
         countryDB.remove(country);
         return country;
+    }
+
+    @Override
+    public Long updateLastId() {
+        return lastId++;
     }
 }

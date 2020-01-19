@@ -3,9 +3,8 @@ package com.example.demo.persistence.entity;
 import com.example.demo.persistence.entity.common.AbstractEntity;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,4 +17,5 @@ public class CountryEntity extends AbstractEntity {
 
     @Column(name = "COUNTRY", nullable = false)
     private String name;
+
 }

@@ -4,6 +4,7 @@ import com.example.demo.persistence.entity.common.AbstractEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,15 +18,26 @@ public class UserEntity extends AbstractEntity {
 
     @Column(name = "EMAIL", nullable = false)
     private String email;
-    @Column(name = "PASSWORD", nullable = false)
+    @Column(name = "PASSWORD", nullable = true)
     private String password;
     @Column(name = "LEVEL_ID", nullable = true)
     private Long levelId;
     @Column(name = "POINTS", nullable = true)
     private Long points;
+    @OneToMany(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(name = "USER_ID")
+    private List<JourneyEntity> journeys;
 
-    @ManyToMany(cascade = CascadeType.ALL,
-    fetch = FetchType.LAZY)
-    @JoinTable(name = "USER_TO_COUNTRY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "COUNTRY_ID"))
-    private List<CountryEntity> countries;
+    public boolean hasJourneys(){
+        return journeys != null && !journeys.isEmpty();
+    }
+
+    public void addJourney(JourneyEntity journey){
+        if(journeys == null){
+            journeys = new ArrayList<>();
+        }
+        journeys.add(journey);
+    }
 }

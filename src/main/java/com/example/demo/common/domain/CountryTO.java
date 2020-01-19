@@ -1,5 +1,6 @@
 package com.example.demo.common.domain;
 
+import com.example.demo.common.domain.common.AbstractTO;
 import lombok.*;
 
 @Getter
@@ -7,7 +8,6 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CountryTO {
-    private Long id;
+public class CountryTO extends AbstractTO {
     private String name;
 }
