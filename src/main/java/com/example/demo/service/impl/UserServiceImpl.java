@@ -8,7 +8,6 @@ import com.example.demo.common.mapper.JourneyMapper;
 import com.example.demo.common.mapper.UserMapper;
 import com.example.demo.persistence.entity.JourneyEntity;
 import com.example.demo.persistence.entity.UserEntity;
-import com.example.demo.persistence.repository.JourneyRepository;
 import com.example.demo.persistence.repository.UserRepository;
 import com.example.demo.service.JourneyService;
 import com.example.demo.service.UserService;
@@ -48,20 +47,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserTO addJourneyToUser(Long userId, JourneyTO journeyTO) {
+    public JourneyTO addJourneyToUser(Long userId, JourneyTO journeyTO) {
         UserEntity user = userRepository.getById(userId);
         user.addJourney(journeyMapper.map(journeyService.add(journeyTO)));
-        return userMapper.map(user);
+        return journeyTO;
     }
 
     @Override
     public List<CountryTO> getUserCountries(Long userId) {
         List<JourneyEntity> userJourneys = userRepository.getById(userId).getJourneys();
-        return userJourneys.stream().map(j -> countryMapper.map(j.getCountry())).collect(Collectors.toList());
+        return userJourneys.stream().distinct().map(j -> countryMapper.map(j.getCountry())).collect(Collectors.toList());
     }
 
     @Override
     public List<UserTO> findAll() {
         return userRepository.findAll().stream().map(u -> userMapper.map(u)).collect(Collectors.toList());
+    }
+
+    @Override
+    public UserTO getById(Long userId) {
+        return userMapper.map(userRepository.getById(userId));
     }
 }

@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface UserService {
     UserTO add(UserTO user);
-    UserTO addJourneyToUser(Long userId, JourneyTO journeyTO);
+    JourneyTO addJourneyToUser(Long userId, JourneyTO journeyTO);
     List<CountryTO> getUserCountries(Long userId);
     List<UserTO> findAll();
+    UserTO getById(Long userId);
 }

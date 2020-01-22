@@ -37,7 +37,7 @@ public class DemoApplication {
 			System.out.println("Countries:");
 			countryService.findAll().forEach(country -> System.out.println(country.getId()+": "+country.getName()));
 			System.out.println("Users:");
-			userService.findAll().forEach(user -> System.out.println(user.getId()+": "+user.getEmail()));
+			userService.findAll().forEach(user -> System.out.println(user.getId()+": "+user.getEmail()+"@gmail.com"));
 			System.out.println("Journeys");
 			journeyService.findAll().forEach(journey -> System.out.println(journey.getId()+": "+journey.getCountry()+", name: "+journey.getName()));
 			System.out.println("Adama:");

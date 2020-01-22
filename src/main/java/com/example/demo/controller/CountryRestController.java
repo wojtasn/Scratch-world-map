@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.common.domain.CountryTO;
 import com.example.demo.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
